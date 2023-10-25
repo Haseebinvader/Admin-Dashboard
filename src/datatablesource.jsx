@@ -2,7 +2,7 @@ export const userColumns = [
     { field: "id", headerName: "ID", width: 70 },
     {
       field: "user",
-      headerName: "User",
+      headerName: "Teachers",
       width: 230,
       renderCell: (params) => {
         return (
@@ -15,13 +15,13 @@ export const userColumns = [
     },
     {
       field: "email",
-      headerName: "Email",
+      headerName: "Students",
       width: 230,
     },
   
     {
       field: "age",
-      headerName: "Age",
+      headerName: "Parents",
       width: 100,
     },
     {
