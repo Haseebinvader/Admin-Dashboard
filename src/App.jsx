@@ -22,7 +22,7 @@ function App() {
           <Route path="/">
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
-            <Route path="users">
+            <Route path="students">
               <Route index element={<List />} />
               <Route path=":userId" element={<Single />} />
               <Route
@@ -31,7 +31,7 @@ function App() {
               />
             </Route>
             <Route path="/chats" element={<Chat />} />
-            <Route path="products">
+            <Route path="teachers">
               <Route index element={<List />} />
               <Route path=":productId" element={<Single />} />
               <Route
