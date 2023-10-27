@@ -3,7 +3,6 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 // import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
-import StoreIcon from "@mui/icons-material/Store";
 import InsertChartIcon from "@mui/icons-material/InsertChart";
 import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
@@ -35,22 +34,22 @@ const Sidebar = () => {
             </Link>
           </li>
           <p className="title">LISTS</p>
-          <Link to="/students" style={{ textDecoration: "none" }}>
+          <Link to="/studentsrecord" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
-              <span>Students</span>
-            </li>
-          </Link>
-          <Link to="/teachers" style={{ textDecoration: "none" }}>
-            <li>
-              <StoreIcon className="icon" />
-              <span>Teachers</span>
+              <span>Users</span>
             </li>
           </Link>
           <Link to='/chats' style={{ textDecoration: "none" }}>
             <li>
               <CreditCardIcon className="icon" />
               <span>Chat Record</span>
+            </li>
+          </Link>
+          <Link to='' style={{ textDecoration: "none" }}>
+            <li>
+              <CreditCardIcon className="icon" />
+              <span>Verifications</span>
             </li>
           </Link>
           {/* <li>
