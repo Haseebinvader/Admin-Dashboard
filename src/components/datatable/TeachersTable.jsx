@@ -1,18 +1,30 @@
-import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns, userRows } from "../../datatablesource";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Typography } from "@mui/material";
+import axios from 'axios';
+import { Link } from "react-router-dom";
+import { userColumns } from "../../datatablesource";
+import "./datatable.scss";
 
 const TeachersTable = () => {
-    const [data, setData] = useState(userRows);
-    const [active, setActive] = useState({
-        id: 2,
-        state: true
-    });
+    const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-    const handleDelete = (id) => { setData(data.filter((item) => item.id !== id)) };
+    useEffect(() => {
+        axios.get('http://localhost:8000/api/admin/teachers/all?page=1&limit=10')
+            .then((response) => {
+                setData(response.data.data.docs);
+                setIsLoading(false);
+            })
+            .catch((error) => {
+                console.error('Error fetching teacher data:', error);
+                setIsLoading(false);
+            });
+    }, [data]);
+    
+    const handleDelete = (id) => {
+        setData(data.filter((item) => item._id !== id));
+    };
 
     const actionColumn = [
         {
@@ -22,27 +34,35 @@ const TeachersTable = () => {
             renderCell: (params) => {
                 return (
                     <div className="cellAction">
-                        <Link to="/users/test" style={{ textDecoration: "none" }}><div className="viewButton">View</div></Link>
-                        <div className="deleteButton" onClick={() => handleDelete(params.row.id)}>Delete</div>
+                        <Link to={`/users/${params.row._id}`} style={{ textDecoration: "none" }}>
+                            <div className="viewButton">View</div>
+                        </Link>
+                        <div className="deleteButton" onClick={() => handleDelete(params.row._id)}>Delete</div>
                     </div>
                 );
             },
         },
     ];
+
+    if (isLoading) {
+        return <p>Loading...</p>;
+    }
+
+    // Render the DataGrid when data is available
     return (
         <div className="datatable">
             <div className="datatableTitle">
                 <div>
-                    <Link to='/studentsrecord'> <Button variant="outlined" color="success" >Students</Button> </Link>
-                    <Button variant="outlined" color="success" sx={{ ml: '10px', backgroundColor: '', color: active.id === 1 ? "#fff" : 'red' }} onClick={() => setActive({ id: 1, state: true })}>Teachers</Button>
-                    <Link to='/parentsrecord'> <Button variant="outlined" color="success" sx={{ ml: '10px' }}>Parents</Button></Link>
+                    <Link to='/studentsrecord'><Button variant="outlined" color="success">Students</Button></Link>
+                    <Button variant="outlined" color="success" sx={{ ml: '10px' }}>Teachers</Button>
+                    <Link to='/parentsrecord'><Button variant="outlined" color="success" sx={{ ml: '10px' }}>Parents</Button></Link>
                 </div>
-                <Link to="/users/new" className="link"> Add New </Link>
+                <Link to="/users/new" className="link">Add New</Link>
             </div>
             <Typography variant="h6" sx={{ color: 'lightgrey' }}>Teachers Record</Typography>
-            <DataGrid className="datagrid" rows={data} columns={userColumns.concat(actionColumn)} pageSize={9} rowsPerPageOptions={[9]} checkboxSelection />
+            <DataGrid className="datagrid" rows={data ? data : "Helllo"} columns={userColumns.concat(actionColumn)} pageSize={9} rowsPerPageOptions={[9]} checkboxSelection />
         </div>
-    )
+    );
 }
 
-export default TeachersTable
+export default TeachersTable;

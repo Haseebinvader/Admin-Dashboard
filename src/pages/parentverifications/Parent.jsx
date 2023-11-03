@@ -14,12 +14,11 @@ const Parent = () => {
                 <Navbar />
                 <div>
                     <Button variant="outlined" color="success" >Parents</Button>
-                    <Button variant="outlined" color="success" sx={{ ml: '10px' }} >Teachers</Button>
+                    <Link to='/teachersverification'>
+                        <Button variant="outlined" color="success" sx={{ ml: '10px' }} >Teachers</Button>
+                    </Link>
                 </div>
-
                 <ParentsVerification />
-
-
             </div>
         </div>
     )

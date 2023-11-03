@@ -3,10 +3,8 @@ import Navbar from "../../components/navbar/Navbar"
 import Sidebar from "../../components/sidebar/Sidebar"
 import TeacherVerification from "../../components/userverifications/TeacherVerification"
 import { Button } from "@mui/material"
-import { useState } from "react"
 const Teacher = () => {
-    const [isParent, setisParent] = useState(false)
-    const [isTeacher, setisTeacher] = useState(false)
+
 
     return (
         <div className="list">
@@ -14,17 +12,13 @@ const Teacher = () => {
             <div className="listContainer">
                 <Navbar />
                 <div>
-                    <Button variant="outlined" color="success" onClick={() => setisParent(true)}>Parents</Button>
-                    <Button variant="outlined" color="success" sx={{ ml: '10px' }} onClick={() => setisTeacher(true)}>Teachers</Button>
+                    <Link to='/parentsverification'>
+                        <Button variant="outlined" color="success" >Parents</Button>
+                    </Link>
+                    <Button variant="outlined" color="success" sx={{ ml: '10px' }}>Teachers</Button>
                 </div>
-                {isParent ?
-                    <TeacherVerification />
-                    : "Hello"
-                }
-                {isTeacher ?
-                    <TeacherVerification />
-                    : ""
-                }
+                <TeacherVerification />
+
             </div>
         </div>
     )

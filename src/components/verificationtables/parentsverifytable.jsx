@@ -1,7 +1,9 @@
 
 const parentsverifytable = () => {
     return (
-        <div>parentsverifytable</div>
+        <div>
+            <h1>parentsverifytable</h1>
+        </div>
     )
 }
 
