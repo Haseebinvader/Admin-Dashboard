@@ -46,7 +46,7 @@ const Sidebar = () => {
               <span>Chat Record</span>
             </li>
           </Link>
-          <Link to='' style={{ textDecoration: "none" }}>
+          <Link to='/parentsverification' style={{ textDecoration: "none" }}>
             <li>
               <CreditCardIcon className="icon" />
               <span>Verifications</span>

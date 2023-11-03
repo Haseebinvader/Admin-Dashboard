@@ -7,6 +7,10 @@ import { Button, Typography } from "@mui/material";
 
 const TeachersTable = () => {
     const [data, setData] = useState(userRows);
+    const [active, setActive] = useState({
+        id: 2,
+        state: true
+    });
 
     const handleDelete = (id) => { setData(data.filter((item) => item.id !== id)) };
 
@@ -30,7 +34,7 @@ const TeachersTable = () => {
             <div className="datatableTitle">
                 <div>
                     <Link to='/studentsrecord'> <Button variant="outlined" color="success" >Students</Button> </Link>
-                    <Button variant="outlined" color="success" sx={{ ml: '10px' }}>Teachers</Button>
+                    <Button variant="outlined" color="success" sx={{ ml: '10px', backgroundColor: '', color: active.id === 1 ? "#fff" : 'red' }} onClick={() => setActive({ id: 1, state: true })}>Teachers</Button>
                     <Link to='/parentsrecord'> <Button variant="outlined" color="success" sx={{ ml: '10px' }}>Parents</Button></Link>
                 </div>
                 <Link to="/users/new" className="link"> Add New </Link>

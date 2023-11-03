@@ -34,7 +34,7 @@ const ParentsTable = () => {
                     <Link to='/studentsrecord'>
                         <Button variant="outlined" color="success" >Students</Button>
                     </Link>
-                    <Button variant="outlined" color="success" sx={{ ml: '10px' }}>Teachers</Button>
+                    <Button variant="outlined" color="success" sx={{ ml: '10px', backgroundColor: 'green', color: '#fff' }}>Teachers</Button>
                     <Link to='/parentsrecord'>
                         <Button variant="outlined" color="success" sx={{ ml: '10px' }}>Parents</Button>
                     </Link>

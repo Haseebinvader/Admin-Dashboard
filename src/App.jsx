@@ -12,6 +12,10 @@ import Chat from "./pages/chatrecord/Chat";
 import StudentsRecord from './pages/students/StudentsRecord'
 import TeachersRecord from "./pages/teachers/TeachersRecord";
 import ParentsRecord from "./pages/parents/ParentsRecord";
+import Parent from "./pages/parentverifications/Parent";
+import Teacher from "./pages/teacherverification/Teacher";
+import Parentsverifytable from "./components/verificationtables/parentsverifytable";
+import Teacherverifytable from "./components/verificationtables/teacherverifytable";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -27,6 +31,10 @@ function App() {
             <Route path="studentsrecord" element={<StudentsRecord />} />
             <Route path="teachersrecord" element={<TeachersRecord />} />
             <Route path="parentsrecord" element={<ParentsRecord />} />
+            <Route path="parentsverification" element={<Parent />} />
+            <Route path="teachersverification" element={<Teacher />} />
+            <Route path="parentverify" element={<Parentsverifytable />} />
+            <Route path="teacherverify" element={<Teacherverifytable />} />
             <Route path="login" element={<Login />} />
             <Route path="users">
               <Route index element={<List />} />
