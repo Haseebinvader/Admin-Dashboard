@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import "./widget.scss";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import { useNavigate } from "react-router-dom";
@@ -9,7 +8,6 @@ const Widget = ({ type, dataanl }) => {
   let data;
   const navigate = useNavigate();
   //temporary
-  const diff = 20;
 
   switch (type) {
     case "user":
@@ -103,10 +101,7 @@ const Widget = ({ type, dataanl }) => {
         </span>
       </div>
       <div className="right">
-        <div className="percentage positive">
-          <KeyboardArrowUpIcon />
-          {diff} %
-        </div>
+       
         {data.icon}
       </div>
     </div>

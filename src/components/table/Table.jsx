@@ -106,29 +106,34 @@ const List = ({ dataanl }) => {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell className="tableCell">User ID</TableCell>
             <TableCell className="tableCell">User Role</TableCell>
-             <TableCell className="tableCell">Date Joined</TableCell>
-            <TableCell className="tableCell">Amount</TableCell>
-            <TableCell className="tableCell">Payment Method</TableCell>
-            <TableCell className="tableCell">Status</TableCell>
+            <TableCell className="tableCell">Name</TableCell>
+            <TableCell className="tableCell">Email</TableCell>
+            <TableCell className="tableCell">Qualification</TableCell>
+            <TableCell className="tableCell">Experience (in years )</TableCell>
+            <TableCell className="tableCell">DOB</TableCell>
+            <TableCell className="tableCell">Phone</TableCell>
+
+            <TableCell className="tableCell">Profile Completion</TableCell>
+            <TableCell className="tableCell">Profile Verification</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {dataanl.map((row) => (
             <TableRow key={row._id}>
-              <TableCell className="tableCell">{row._id}</TableCell>
               <TableCell className="tableCell">
                 <div className="cellWrapper">
                   <img src={row?.profilepicture} alt="" className="image" />
-                  {row.name}
+                  {row.userType}
                 </div>
               </TableCell>
-              <TableCell className="tableCell">
-                {row.createdAt?.slice(0, 10)}
-              </TableCell>
-              <TableCell className="tableCell">{row.amount}</TableCell>
-              <TableCell className="tableCell">{row.method}</TableCell>
+              <TableCell>{row.name}</TableCell>
+              <TableCell>{row.email}</TableCell>
+              <TableCell>{row.degreeName}</TableCell>
+              <TableCell>{row.teachingsExperience}</TableCell>
+              <TableCell>{row.dateOfBirth}</TableCell>
+              <TableCell>{row.phone}</TableCell>
+           
               <TableCell className="tableCell">
                 <span
                   className={`status ${
@@ -136,6 +141,15 @@ const List = ({ dataanl }) => {
                   }`}
                 >
                   {row.profile_completeion ? "Completed" : "Pending"}
+                </span>
+              </TableCell>
+              <TableCell className="tableCell">
+                <span
+                  className={`status ${
+                    row.profileverify ? "Approved" : "Pending"
+                  }`}
+                >
+                  {row.profileverify ? "Verified" : "Unverified"}
                 </span>
               </TableCell>
             </TableRow>

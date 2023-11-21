@@ -1,4 +1,4 @@
-import Chart from "../../components/chart/Chart";
+// import Chart from "../../components/chart/Chart";
 import Featured from "../../components/featured/Featured";
 import Navbar from "../../components/navbar/Navbar";
 import Sidebar from "../../components/sidebar/Sidebar";
@@ -14,7 +14,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/admin/analytics")
+      .get("https://tutor4u.vercel.app/api/admin/analytics")
       .then((response) => {
         console.log(response);
         setData(response.data.data);
@@ -35,14 +35,14 @@ const Home = () => {
         <Navbar />
 
         <div className="widgets">
-          <Widget type="user" dataanl={data?.allstudentsanl} />
+           <Widget type="user" dataanl={data?.allstudentsanl} />
           <Widget type="order" dataanl={data?.allteachersanl} />
-          <Widget type="earning" dataanl={data?.allparentsanl} />
+          <Widget type="earning" dataanl={data?.allparentsanl} /> 
           <Widget type="balance" />
         </div>
         <div className="charts">
           <Featured />
-          <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} />
+          {/* <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} /> */}
         </div>
         <div className="listContainer">
           <div className="listTitle">Recent Users</div>
