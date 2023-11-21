@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import "./table.scss";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,46 +8,136 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-const List = () => {
- 
-  const apiData = {
-    achievements: "nothing special.",
-    address: "kjsagjkask askjd gks",
-    awards: ['yes', 'no', 'ok', 'aSD'],
-    dateOfBirth: "1997-06-10",
-    degreeName: "BS cs",
-    degreeYear: "2011",
-    email: "teacher@gmail.com",
-    instituteName: "Degree college haripur",
-    name: "Teacher Registration",
-    password: "$2b$10$qZj8CVeDwA/8YWWuSi6BEOXo71qr3/xgiSaNbWvFvw5v/i2o9fqNS",
-    phone: "09007865557",
-    position: "techorS",
-    previousInstitute: "ok google schoolS",
-    profile_completeion: true,
-    profilepic_id: "1HuEA-fYuNTSt6hCywuoFHXLFxR0bOEq-",
-    profilepicture: "https://drive.google.com/uc?id=1HuEA-fYuNTSt6hCywuoFHXLFxR0bOEq-&export=download",
-    profileverify: "verified",
-    rating: [],
-    subjects: ['ok', 'yes', 'no', 'bye', 'S'],
-    teachingsExperience: "15",
-    userType: "teacher"
-  };
-
+const List = ({ dataanl }) => {
+  // const rows = [
+  //   {
+  //     id: 1143155,
+  //     product: "Teacher",
+  //     img: "https://m.media-amazon.com/images/I/81bc8mA3nKL._AC_UY327_FMwebp_QL65_.jpg",
+  //     customer: "John Smith",
+  //     date: "1 March",
+  //     amount: 785,
+  //     method: "Cash on Delivery",
+  //     status: "Approved",
+  //   },
+  //   {
+  //     id: 2235235,
+  //     product: "Student",
+  //     img: "https://m.media-amazon.com/images/I/31JaiPXYI8L._AC_UY327_FMwebp_QL65_.jpg",
+  //     customer: "Michael Doe",
+  //     date: "1 March",
+  //     amount: 900,
+  //     method: "Online Payment",
+  //     status: "Pending",
+  //   },
+  //   {
+  //     id: 2342353,
+  //     product: "Teacher",
+  //     img: "https://m.media-amazon.com/images/I/71kr3WAj1FL._AC_UY327_FMwebp_QL65_.jpg",
+  //     customer: "John Smith",
+  //     date: "1 March",
+  //     amount: 35,
+  //     method: "Cash on Delivery",
+  //     status: "Pending",
+  //   },
+  //   {
+  //     id: 2357741,
+  //     product: "Teacher",
+  //     img: "https://m.media-amazon.com/images/I/71wF7YDIQkL._AC_UY327_FMwebp_QL65_.jpg",
+  //     customer: "Jane Smith",
+  //     date: "1 March",
+  //     amount: 920,
+  //     method: "Online",
+  //     status: "Approved",
+  //   },
+  //   {
+  //     id: 2342355,
+  //     product: "Student",
+  //     img: "https://m.media-amazon.com/images/I/81hH5vK-MCL._AC_UY327_FMwebp_QL65_.jpg",
+  //     customer: "Harold Carol",
+  //     date: "1 March",
+  //     amount: 2000,
+  //     method: "Online",
+  //     status: "Pending",
+  //   },
+  //   {
+  //     id: 2357741,
+  //     product: "Teacher",
+  //     img: "https://m.media-amazon.com/images/I/71wF7YDIQkL._AC_UY327_FMwebp_QL65_.jpg",
+  //     customer: "Jane Smith",
+  //     date: "1 March",
+  //     amount: 920,
+  //     method: "Online",
+  //     status: "Approved",
+  //   },
+  //   {
+  //     id: 2342355,
+  //     product: "Student",
+  //     img: "https://m.media-amazon.com/images/I/81hH5vK-MCL._AC_UY327_FMwebp_QL65_.jpg",
+  //     customer: "Harold Carol",
+  //     date: "1 March",
+  //     amount: 2000,
+  //     method: "Online",
+  //     status: "Pending",
+  //   },
+  //   {
+  //     id: 2357741,
+  //     product: "Parent",
+  //     img: "https://m.media-amazon.com/images/I/71wF7YDIQkL._AC_UY327_FMwebp_QL65_.jpg",
+  //     customer: "Jane Smith",
+  //     date: "1 March",
+  //     amount: 920,
+  //     method: "Online",
+  //     status: "Approved",
+  //   },
+  //   {
+  //     id: 23423553,
+  //     product: "Parent",
+  //     img: "https://m.media-amazon.com/images/I/81hH5vK-MCL._AC_UY327_FMwebp_QL65_.jpg",
+  //     customer: "Parent",
+  //     date: "1 March",
+  //     amount: 2000,
+  //     method: "Online",
+  //     status: "Pending",
+  //   },
+  // ];
   return (
     <TableContainer component={Paper} className="table">
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell className="tableCell" sx={{fontSize: '14px', textTransform: 'uppercase', fontWeight: '600'}}>Key</TableCell>
-            <TableCell className="tableCell" sx={{fontSize: '14px', textTransform: 'uppercase', fontWeight: '600'}}>Value</TableCell>
+            <TableCell className="tableCell">User ID</TableCell>
+            <TableCell className="tableCell">User Role</TableCell>
+             <TableCell className="tableCell">Date Joined</TableCell>
+            <TableCell className="tableCell">Amount</TableCell>
+            <TableCell className="tableCell">Payment Method</TableCell>
+            <TableCell className="tableCell">Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {Object.keys(apiData).map((key, index) => (
-            <TableRow key={index}>
-              <TableCell className="tableCell" sx={{fontSize: '14px', textTransform: 'uppercase', fontWeight: '600'}}>{key}</TableCell>
-              <TableCell className="tableCell" sx={{fontSize: '14px', textTransform: 'uppercase'}}>{apiData[key]}</TableCell>
+          {dataanl.map((row) => (
+            <TableRow key={row._id}>
+              <TableCell className="tableCell">{row._id}</TableCell>
+              <TableCell className="tableCell">
+                <div className="cellWrapper">
+                  <img src={row?.profilepicture} alt="" className="image" />
+                  {row.name}
+                </div>
+              </TableCell>
+              <TableCell className="tableCell">
+                {row.createdAt?.slice(0, 10)}
+              </TableCell>
+              <TableCell className="tableCell">{row.amount}</TableCell>
+              <TableCell className="tableCell">{row.method}</TableCell>
+              <TableCell className="tableCell">
+                <span
+                  className={`status ${
+                    row.profile_completeion ? "Approved" : "Pending"
+                  }`}
+                >
+                  {row.profile_completeion ? "Completed" : "Pending"}
+                </span>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
