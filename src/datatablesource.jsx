@@ -1,44 +1,32 @@
 export const userColumns = [
-  { field: "_id", headerName: "ID", flex: true },
-  {
-    field: "subjects",
-    headerName: "Subjects",
-    flex: true, renderCell: (params) => {
-      return (
-        <div className="cellWithImg">
-          {params.row.subjects}
-        </div>
-      );
-    },
-  },
-  {
-    field: "email",
-    headerName: "Email", flex: true
-  },
+  { field: "id", headerName: "ID", flex: true },
   {
     field: "name",
-    headerName: "Name", flex: true
-  },
-  {
-    field: "profileverify",
-    headerName: "Profile Verification", flex: true
+    headerName: "Subjects",
+    flex: true,
   },
   {
     field: "profile_completeion",
+    headerName: "Email", flex: true
+  },
+  {
+    field: "phone",
+    headerName: "Name", flex: true
+  },
+  {
+    field: "dateOfBirth",
+    headerName: "Profile Verification", flex: true
+  },
+  {
+    field: "achivements",
     headerName: "Profile Completion", flex: true
   },
   {
-    field: "awards",
+    field: "address",
     headerName: "Awards", flex: true,
-    renderCell: (params) => {
-      return (
-        <div className="cellWithAwards">
-          {params.row.awards}
-        </div>
-      );
-    },
   },
 ];
+
 
 
 //temporary data
