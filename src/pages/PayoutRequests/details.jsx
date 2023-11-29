@@ -30,7 +30,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const DetailsRequests = () => {
+const DetailsRequestsPayout = () => {
   const navigate = useNavigate();
   const [expanded, setExpanded] = React.useState(false);
   const [isDoneEnroll, setisDoneEnroll] = useState(false);
@@ -49,15 +49,12 @@ const DetailsRequests = () => {
   });
   const [isLoading, setIsLoading] = useState(true);
 
-  const getPayment = (cid, sid) => {
+  const getPayment = () => {
     axios
-      .post("http://localhost:8000/api/course/getpaymentbyuser", {
-        studentId: sid,
-        courseId: cid,
-      })
+      .get(`http://localhost:8000/api/admin/getspecificpayment/${id}`)
       .then((response) => {
-        console.log(response);
-        setreqdata(response.data.data);
+        console.log("res", response);
+        setreqdata(response.data.data[0]);
         setpayId(response.data.data[0]?._id);
         setIsLoading(false);
       })
@@ -67,31 +64,16 @@ const DetailsRequests = () => {
       });
   };
   useEffect(() => {
-    axios
-      .post(`http://localhost:8000/api/course/requestforcourse/${id}`)
-      .then((response) => {
-        console.log(response);
-        setstudentId(response.data.data.docs?.studentId?._id);
-        setcourseId(response.data.data.docs?.courseId?._id);
-        getPayment(
-          response.data.data.docs?.courseId?._id,
-          response.data.data.docs?.studentId?._id
-        );
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setIsLoading(false);
-      });
+    getPayment();
   }, []);
   const EnrollCourse = () => {
+    console.log(reqdata?._id);
     setisDoneEnroll(true);
     axios
-      .patch(`http://localhost:8000/api/course/enroll/${courseId}`, {
-        studentId: studentId,
-      })
+      .post(`http://localhost:8000/api/admin/acceptpayment/${reqdata?._id}`)
       .then((res) => {
         console.log(res.data);
-        AcceptRequest();
+        EnrollCourseforuser();
       })
       .catch((err) => {
         console.log(err);
@@ -104,94 +86,78 @@ const DetailsRequests = () => {
         setisDoneEnroll(false);
       });
   };
-  const AcceptRequest = () => {
-    axios
-      .post(`http://localhost:8000/api/course/acceptRequest/${id}`)
-      .then((data) => {
-        console.log(data);
-        completepayment();
-      })
-      .catch((err) => console.log(err));
-  };
-  const completepayment = () => {
-    axios
-      .post(`http://localhost:8000/api/course/completepayment/${payId}`)
-      .then((data) => {
-        console.log(data);
-        AddEarningTeacher();
-      })
-      .catch((err) => console.log(err));
-  };
-  const AddEarningTeacher = () => {
+  const EnrollCourseforuser = () => {
+    console.log(reqdata?._id);
+    setisDoneEnroll(true);
     axios
       .post(
-        `http://localhost:8000/api/teacher/addearnings/${reqdata[0]?.instructor}`,
-        {
-          earnings: parseInt(
-            reqdata[0]?.instructorAmount ? reqdata[0]?.instructorAmount : 0
-          ),
+        `http://localhost:8000/api/admin/acceptpaymentforuser/${reqdata?.instructor?._id}`,{
+
         }
       )
-      .then((data) => {
-        console.log(data);
-        AddEarningTeacherforwidthdraw();
-      })
-      .catch((err) => console.log(err));
-  };
-  const AddEarningTeacherforwidthdraw = () => {
-    axios
-      .post(
-        `http://localhost:8000/api/teacher/addearningsforwithdraw/${reqdata[0]?.instructor}`,
-        {
-          earnings: parseInt(
-            reqdata[0]?.instructorAmount ? reqdata[0]?.instructorAmount : 0
-          ),
-        }
-      )
-      .then((data) => {
-        console.log(data);
+      .then((res) => {
+        console.log(res.data);
         Swal.fire({
           // position: "top-end",
           icon: "success",
-          title: "Student Enrolled Successfully",
+          title: "Payment CLeared Successfully",
           showConfirmButton: false,
           timer: 3500,
         });
         setisDoneEnroll(false);
-        navigate("/EnrollRequest");
+        navigate("/PayoutRequest");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: `${err?.response.data.message}`,
+          // footer: '<a href="">Why do I have this issue?</a>',
+        });
+        setisDoneEnroll(false);
+      });
   };
+
   const Rejectpayment = () => {
+    setisRejectEnroll(true);
     axios
-      .post(`http://localhost:8000/api/course/rejectpayment/${payId}`)
+      .post(`http://localhost:8000/api/admin/rejectpayment/${id}`, {
+        amount: reqdata?.amount,
+      })
+      .then((data) => {
+        console.log(data);
+        Rejectpaymentforuser();
+      })
+      .catch((err) => {
+        setisRejectEnroll(false);
+        console.log(err);
+      });
+  };
+  const Rejectpaymentforuser = () => {
+    setisRejectEnroll(true);
+    axios
+      .post(`http://localhost:8000/api/admin/rejectpaymentforuser/${id}`, {
+        amount: reqdata?.amount,
+      })
       .then((data) => {
         console.log(data);
         Swal.fire({
           // position: "top-end",
           icon: "success",
-          title: "Student Enrollment Rejected Successfully",
+          title: "Payout Rejected Successfully",
           showConfirmButton: false,
           timer: 3500,
         });
         setisRejectEnroll(false);
-        navigate("/EnrollRequest");
-      })
-      .catch((err) => console.log(err));
-  };
-  const RejectRequest = () => {
-    setisRejectEnroll(true);
-    axios
-      .post(`http://localhost:8000/api/course/rejectRequest/${id}`)
-      .then((data) => {
-        console.log(data);
-        Rejectpayment();
+        navigate("/PayoutRequest");
       })
       .catch((err) => {
-        console.log(err);
         setisRejectEnroll(false);
+        console.log(err);
       });
   };
+
   return (
     <div className="list">
       <Sidebar />
@@ -199,25 +165,20 @@ const DetailsRequests = () => {
         <Navbar />
         <div className="cardpayment">
           {" "}
-          <Card sx={{ maxWidth: 345 }}>
-            <CardHeader
-              title="Payment Details"
-              subheader={reqdata[0]?.createdAt?.slice(0, 10)}
-            />
-            <CardMedia
-              component="img"
-              height="auto"
-              image={reqdata[0]?.paymentFile}
-              alt="Paella dish"
-            />
+          <Card sx={{ minWidth: 275 }} key={reqdata?._id}>
             <CardContent>
-              <Typography variant="body2" color="text.secondary">
-                <span className="recptId">Reciept Id:</span>{" "}
-                {reqdata[0]?.recieptId}
+              <p>
+                <span className="amount">$ {reqdata?.amount}</span>
+              </p>
+              <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                Requested&nbsp;By:
+              </Typography>
+              <Typography variant="h5" component="div">
+                {reqdata?.instructor?.name}
               </Typography>
             </CardContent>
             {isDoneEnroll ? (
-              <small>Enrolling...</small>
+              <small>Processing...</small>
             ) : isRejectEnroll ? (
               <small>Rejecting...</small>
             ) : (
@@ -230,7 +191,7 @@ const DetailsRequests = () => {
                 >
                   <CheckCircleOutlineOutlinedIcon color="success" />
                 </IconButton>
-                <IconButton aria-label="share" onClick={() => RejectRequest()}>
+                <IconButton aria-label="share" onClick={() => Rejectpayment()}>
                   <CancelOutlinedIcon color="error" />
                 </IconButton>
               </CardActions>
@@ -242,4 +203,4 @@ const DetailsRequests = () => {
   );
 };
 
-export default DetailsRequests;
+export default DetailsRequestsPayout;

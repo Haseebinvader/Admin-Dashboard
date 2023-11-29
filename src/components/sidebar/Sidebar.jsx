@@ -46,6 +46,12 @@ const Sidebar = () => {
               <span>Enroll Requests</span>
             </li>
           </Link>
+          <Link to="/PayoutRequest" style={{ textDecoration: "none" }}>
+            <li>
+              <PersonOutlineIcon className="icon" />
+              <span>PayOut Requests</span>
+            </li>
+          </Link>
           <Link to="/chats" style={{ textDecoration: "none" }}>
             <li>
               <CreditCardIcon className="icon" />
