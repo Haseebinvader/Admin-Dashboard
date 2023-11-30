@@ -20,6 +20,8 @@ import EnrollRequetsPage from "./pages/EnrollmentRequets";
 import DetailsRequests from "./pages/EnrollmentRequets/details";
 import PayoutRequestPage from "./pages/PayoutRequests";
 import DetailsRequestsPayout from "./pages/PayoutRequests/details";
+import TeacherDetails from "./pages/teacherverification/verificationDetails";
+import StudentDetails from "./components/datatable/StudentsDetails";
  
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -40,6 +42,8 @@ function App() {
             <Route path="EnrollRequest" element={<EnrollRequetsPage />} />
             <Route path="PayoutRequest" element={<PayoutRequestPage />} />
             <Route path="payoutrequestdetail/:id" element={<DetailsRequestsPayout />} />
+            <Route path="TeacherDetails/:id/:type" element={<TeacherDetails />} />
+            <Route path="StudentsDetails/:id" element={<StudentDetails />} />
             <Route path="requestdetail/:id" element={<DetailsRequests />} />
             <Route path="login" element={<Login />} />
             <Route path="users">

@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import Navbar from "../../components/navbar/Navbar"
 import Sidebar from "../../components/sidebar/Sidebar"
 import TeacherVerification from "../../components/userverifications/TeacherVerification"
 // eslint-disable-next-line no-unused-vars
 import { Button } from "@mui/material"
-const Teacher = () => {
-
+import DetailsTeacher from "../../components/userverifications/DetailVerify"
+const TeacherDetails = () => {
+const {id, type} = useParams()
 
     return (
         <div className="list"> 
@@ -14,11 +15,11 @@ const Teacher = () => {
             <div className="listContainer">
                 <Navbar />
                 
-                <TeacherVerification />
+                <DetailsTeacher id={id} type={type} />
 
             </div>
         </div>
     )
 }
 
-export default Teacher
+export default TeacherDetails

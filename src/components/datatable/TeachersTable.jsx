@@ -1,76 +1,40 @@
 /* eslint-disable no-unused-vars */
-import { DataGrid } from "@mui/x-data-grid";
-import { useState, useEffect } from "react";
-import { Button, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
-// import { userColumns } from "../../datatablesource";
-import "./datatable.scss";
+
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import axios from "axios";
-const userColumns = [
-    { field: "_id", headerName: "ID", flex: true },
-    { field: "name", headerName: "Name", flex: true },
-    { field: "email", headerName: "Email", flex: true },
-    { field: "profileverify", headerName: "Profile Verification", flex: true },
-    {
-      field: "profile_completeion",
-      headerName: "Profile Completion",
-      flex: true,
-    },
-  ];
-const TeachersTable = () => {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
-  useEffect(() => {
+export default function TeachersTable() {
+  const navigate = useNavigate();
+  const [Allusers, setAllusers] = React.useState([]);
+  const [isloading, setisloading] = React.useState(false);
+  const getAllusers = () => {
+    setisloading(true);
     axios
-      .get("/admin/teachers/all?page=1&limit=100")
-      .then((response) => {
-        setData(response.data.data.docs);
-        setIsLoading(false);
+      .get("/admin/teachers/all")
+      .then((res) => {
+        console.log(res);
+        setAllusers(res.data.data.docs);
+        setisloading(false);
       })
-      .catch((error) => {
-        console.error("Error fetching teacher data:", error);
-        setIsLoading(false);
+      .catch((err) => {
+        console.log(err);
+        setisloading(false);
+        setAllusers([]);
       });
-  }, [data]);
-
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item._id !== id));
   };
+  React.useEffect(() => {
+    getAllusers();
+  }, []);
 
-  const actionColumn = [
-    {
-      field: "action",
-      headerName: "Action",
-      width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="cellAction">
-            <Link
-              to={`/users/${params.row._id}`}
-              style={{ textDecoration: "none" }}
-            >
-              <div className="viewButton">View</div>
-            </Link>
-            <div
-              className="deleteButton"
-              onClick={() => handleDelete(params.row._id)}
-            >
-              Delete
-            </div>
-          </div>
-        );
-      },
-    },
-  ];
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  // Render the DataGrid when data is available
   return (
-    <div className="datatable">
+    <div className="p-5">
       <div className="datatableTitle">
         <div>
           <Link to="/studentsrecord">
@@ -78,33 +42,65 @@ const TeachersTable = () => {
               Students
             </Button>
           </Link>
-          <Button variant="outlined" color="success" sx={{ ml: "10px" }}>
-            Teachers
-          </Button>
+          <Link to="/teachersrecord">
+            <Button variant="outlined" color="success" sx={{ ml: "10px" }}>
+              Teachers
+            </Button>
+          </Link>
           <Link to="/parentsrecord">
             <Button variant="outlined" color="success" sx={{ ml: "10px" }}>
               Parents
             </Button>
           </Link>
         </div>
-        <Link to="/users/new" className="link">
-          Add New
-        </Link>
       </div>
-      <Typography variant="h6" sx={{ color: "lightgrey" }}>
-        Teachers Record
-      </Typography>
-      <DataGrid
-        className="datagrid"
-        rows={data}
-        getRowId={(row) => row._id}
-        columns={userColumns.concat(actionColumn)}
-        pageSize={9}
-        rowsPerPageOptions={[9]}
-        checkboxSelection
-      />{" "}
+      <h1 className="mb-5 mt-3 text-blue-500 text-[15px]">Teachers</h1>
+      {isloading ? (
+        <small className="text-blue-500 text-[20px]">Loading...</small>
+      ) : (
+        <div className="flex justify-start gap-3 flex-wrap">
+          {Allusers?.length > 0 ? (
+            Allusers?.map((data) => (
+              <Card sx={{ maxWidth: 345 }} key={data?._id}>
+                <CardMedia
+                  component="img"
+                  alt="green iguana"
+                  height="140"
+                  image={
+                    data?.profilepicture ||
+                    "https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png"
+                  }
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {data?.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    <span className="text-blue-500 font-semibold">
+                      {data?.email}
+                    </span>
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    <span className="text-green-500 font-bold text-[15px]">
+                      {data?.address}
+                    </span>
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button
+                    size="small"
+                    onClick={() => navigate(`/TeacherDetails/${data?._id}/detail`)}
+                  >
+                    Details
+                  </Button>
+                </CardActions>
+              </Card>
+            ))
+          ) : (
+            <small className="text-red-500">No Request Found!</small>
+          )}
+        </div>
+      )}
     </div>
   );
-};
-
-export default TeachersTable;
+}

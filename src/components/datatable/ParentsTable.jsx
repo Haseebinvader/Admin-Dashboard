@@ -1,68 +1,40 @@
-import "./datatable.scss";
-import { DataGrid } from "@mui/x-data-grid";
-// import { userColumns, userRows } from "../../datatablesource";
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Button, Typography } from "@mui/material";
+/* eslint-disable no-unused-vars */
+
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import axios from "axios";
-const userColumns = [
-  { field: "_id", headerName: "ID", flex: true },
-  { field: "name", headerName: "Name", flex: true },
-  { field: "email", headerName: "Email", flex: true },
-  { field: "profileverify", headerName: "Profile Verification", flex: true },
-  {
-    field: "profile_completeion",
-    headerName: "Profile Completion",
-    flex: true,
-  },
-];
-const ParentsTable = () => {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
-  useEffect(() => {
+export default function ParentsTable() {
+  const navigate = useNavigate();
+  const [Allusers, setAllusers] = React.useState([]);
+  const [isloading, setisloading] = React.useState(false);
+  const getAllusers = () => {
+    setisloading(true);
     axios
-      .get("/admin/parents/all?page=1&limit=100")
-      .then((response) => {
-        setData(response.data.data.docs);
-        setIsLoading(false);
+      .get("/admin/parents/all")
+      .then((res) => {
+        console.log(res);
+        setAllusers(res.data.data.docs);
+        setisloading(false);
       })
-      .catch((error) => {
-        console.error("Error fetching teacher data:", error);
-        setIsLoading(false);
+      .catch((err) => {
+        console.log(err);
+        setisloading(false);
+        setAllusers([]);
       });
-  }, [data]);
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
   };
+  React.useEffect(() => {
+    getAllusers();
+  }, []);
 
-  const actionColumn = [
-    {
-      field: "action",
-      headerName: "Action",
-      width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="cellAction">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
-            </Link>
-            <div
-              className="deleteButton"
-              onClick={() => handleDelete(params.row.id)}
-            >
-              Delete
-            </div>
-          </div>
-        );
-      },
-    },
-  ];
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
   return (
-    <div className="datatable">
+    <div className="p-5">
       <div className="datatableTitle">
         <div>
           <Link to="/studentsrecord">
@@ -81,24 +53,70 @@ const ParentsTable = () => {
             </Button>
           </Link>
         </div>
-        <Link to="/users/new" className="link">
-          Add New
-        </Link>
       </div>
-      <Typography variant="h6" sx={{ color: "lightgrey" }}>
-        Parents Record
-      </Typography>
-      <DataGrid
-        className="datagrid"
-        rows={data}
-        getRowId={(row) => row._id}
-        columns={userColumns.concat(actionColumn)}
-        pageSize={9}
-        rowsPerPageOptions={[9]}
-        checkboxSelection
-      />{" "}
+      <h1 className="mb-5 mt-3 text-blue-500 text-[15px]">Parents</h1>
+      {isloading ? (
+        <small className="text-blue-500 text-[20px]">Loading...</small>
+      ) : (
+        <div className="flex justify-start gap-5 flex-wrap">
+          {Allusers?.length > 0 ? (
+            Allusers?.map((data) => (
+              <Card sx={{ maxWidth: 345 }} key={data?._id}>
+                <CardMedia
+                  component="img"
+                  alt="green iguana"
+                  height="140"
+                  image={
+                    data?.profilepicture ||
+                    "https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png"
+                  }
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div">
+                    {data?.name}
+                  </Typography>
+                  <div className="mt-3 flex flex-col gap-2">
+                    <Typography variant="body2" color="text.secondary">
+                      <span className="text-black font-semibold text-lg">
+                        Email:&nbsp;
+                      </span>
+                      <span className="text-blue-500 font-semibold">
+                        {data?.email}
+                      </span>
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      <span className="text-black font-semibold text-lg">
+                        Phone#:&nbsp;
+                      </span>
+                      <span className="text-blue-500 font-semibold">
+                        {data?.phone}
+                      </span>
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      <span className="text-black font-semibold text-lg">
+                        Phone2:&nbsp;
+                      </span>
+                      <span className="text-blue-500 font-semibold">
+                        {data?.phone2}
+                      </span>
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      <span className="text-black font-semibold text-lg">
+                        Address:&nbsp;
+                      </span>
+                      <span className="text-blue-500 font-semibold">
+                        {data?.address}
+                      </span>
+                    </Typography>
+                  </div>
+                </CardContent>
+              </Card>
+            ))
+          ) : (
+            <small className="text-red-500">No Request Found!</small>
+          )}
+        </div>
+      )}
     </div>
   );
-};
-
-export default ParentsTable;
+}
