@@ -22,7 +22,7 @@ const ParentsTable = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/admin/parents/all?page=1&limit=100")
+      .get("/admin/parents/all?page=1&limit=100")
       .then((response) => {
         setData(response.data.data.docs);
         setIsLoading(false);

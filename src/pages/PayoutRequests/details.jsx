@@ -51,7 +51,7 @@ const DetailsRequestsPayout = () => {
 
   const getPayment = () => {
     axios
-      .get(`http://localhost:8000/api/admin/getspecificpayment/${id}`)
+      .get(`/admin/getspecificpayment/${id}`)
       .then((response) => {
         console.log("res", response);
         setreqdata(response.data.data[0]);
@@ -70,7 +70,7 @@ const DetailsRequestsPayout = () => {
     console.log(reqdata?._id);
     setisDoneEnroll(true);
     axios
-      .post(`http://localhost:8000/api/admin/acceptpayment/${reqdata?._id}`)
+      .post(`/admin/acceptpayment/${reqdata?._id}`)
       .then((res) => {
         console.log(res.data);
         EnrollCourseforuser();
@@ -91,8 +91,9 @@ const DetailsRequestsPayout = () => {
     setisDoneEnroll(true);
     axios
       .post(
-        `http://localhost:8000/api/admin/acceptpaymentforuser/${reqdata?.instructor?._id}`,{
-
+        `/admin/acceptpaymentforuser/${reqdata?.instructor?._id}`,
+        {
+          amount: reqdata?.amount,
         }
       )
       .then((res) => {
@@ -122,7 +123,7 @@ const DetailsRequestsPayout = () => {
   const Rejectpayment = () => {
     setisRejectEnroll(true);
     axios
-      .post(`http://localhost:8000/api/admin/rejectpayment/${id}`, {
+      .post(`/admin/rejectpayment/${id}`, {
         amount: reqdata?.amount,
       })
       .then((data) => {
@@ -137,7 +138,7 @@ const DetailsRequestsPayout = () => {
   const Rejectpaymentforuser = () => {
     setisRejectEnroll(true);
     axios
-      .post(`http://localhost:8000/api/admin/rejectpaymentforuser/${id}`, {
+      .post(`/admin/rejectpaymentforuser/${id}`, {
         amount: reqdata?.amount,
       })
       .then((data) => {

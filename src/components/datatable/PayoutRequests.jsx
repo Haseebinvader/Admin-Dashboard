@@ -25,7 +25,7 @@ export default function PayoutRequests() {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/admin/getallpayment")
+      .get("/admin/getallpayment")
       .then((response) => {
         console.log(response);
         setData(response.data.data);

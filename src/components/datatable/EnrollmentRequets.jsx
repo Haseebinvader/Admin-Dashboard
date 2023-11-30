@@ -25,7 +25,7 @@ export default function EnrollmentRequets() {
   const navigate = useNavigate()
   useEffect(() => {
     axios
-      .post("http://localhost:8000/api/course/requestforcourse")
+      .post("/course/requestforcourse")
       .then((response) => {
         console.log(response)
         setData(response.data.data.docs)

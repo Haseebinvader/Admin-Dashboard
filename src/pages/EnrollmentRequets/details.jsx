@@ -51,7 +51,7 @@ const DetailsRequests = () => {
 
   const getPayment = (cid, sid) => {
     axios
-      .post("http://localhost:8000/api/course/getpaymentbyuser", {
+      .post("/course/getpaymentbyuser", {
         studentId: sid,
         courseId: cid,
       })
@@ -68,7 +68,7 @@ const DetailsRequests = () => {
   };
   useEffect(() => {
     axios
-      .post(`http://localhost:8000/api/course/requestforcourse/${id}`)
+      .post(`/course/requestforcourse/${id}`)
       .then((response) => {
         console.log(response);
         setstudentId(response.data.data.docs?.studentId?._id);
@@ -86,7 +86,7 @@ const DetailsRequests = () => {
   const EnrollCourse = () => {
     setisDoneEnroll(true);
     axios
-      .patch(`http://localhost:8000/api/course/enroll/${courseId}`, {
+      .patch(`/course/enroll/${courseId}`, {
         studentId: studentId,
       })
       .then((res) => {
@@ -106,7 +106,7 @@ const DetailsRequests = () => {
   };
   const AcceptRequest = () => {
     axios
-      .post(`http://localhost:8000/api/course/acceptRequest/${id}`)
+      .post(`/course/acceptRequest/${id}`)
       .then((data) => {
         console.log(data);
         completepayment();
@@ -115,7 +115,7 @@ const DetailsRequests = () => {
   };
   const completepayment = () => {
     axios
-      .post(`http://localhost:8000/api/course/completepayment/${payId}`)
+      .post(`/course/completepayment/${payId}`)
       .then((data) => {
         console.log(data);
         AddEarningTeacher();
@@ -125,7 +125,7 @@ const DetailsRequests = () => {
   const AddEarningTeacher = () => {
     axios
       .post(
-        `http://localhost:8000/api/teacher/addearnings/${reqdata[0]?.instructor}`,
+        `/teacher/addearnings/${reqdata[0]?.instructor}`,
         {
           earnings: parseInt(
             reqdata[0]?.instructorAmount ? reqdata[0]?.instructorAmount : 0
@@ -141,7 +141,7 @@ const DetailsRequests = () => {
   const AddEarningTeacherforwidthdraw = () => {
     axios
       .post(
-        `http://localhost:8000/api/teacher/addearningsforwithdraw/${reqdata[0]?.instructor}`,
+        `/teacher/addearningsforwithdraw/${reqdata[0]?.instructor}`,
         {
           earnings: parseInt(
             reqdata[0]?.instructorAmount ? reqdata[0]?.instructorAmount : 0
@@ -164,7 +164,7 @@ const DetailsRequests = () => {
   };
   const Rejectpayment = () => {
     axios
-      .post(`http://localhost:8000/api/course/rejectpayment/${payId}`)
+      .post(`/course/rejectpayment/${payId}`)
       .then((data) => {
         console.log(data);
         Swal.fire({
@@ -182,7 +182,7 @@ const DetailsRequests = () => {
   const RejectRequest = () => {
     setisRejectEnroll(true);
     axios
-      .post(`http://localhost:8000/api/course/rejectRequest/${id}`)
+      .post(`/course/rejectRequest/${id}`)
       .then((data) => {
         console.log(data);
         Rejectpayment();

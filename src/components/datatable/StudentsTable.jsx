@@ -23,7 +23,7 @@ const StudentsTable = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/admin/students/all?page=1&limit=100")
+      .get("/admin/students/all?page=1&limit=100")
       .then((response) => {
         setData(response.data.data.docs)
         setIsLoading(false)
