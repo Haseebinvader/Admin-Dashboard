@@ -102,6 +102,7 @@ const List = ({ dataanl }) => {
   //   },
   // ];
   return (
+    <div className="h-[50rem] overflow-auto">
     <TableContainer component={Paper} className="table">
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
@@ -109,10 +110,7 @@ const List = ({ dataanl }) => {
             <TableCell className="tableCell">User Role</TableCell>
             <TableCell className="tableCell">Name</TableCell>
             <TableCell className="tableCell">Email</TableCell>
-            <TableCell className="tableCell">Qualification</TableCell>
-            <TableCell className="tableCell">Experience (in years )</TableCell>
-            <TableCell className="tableCell">DOB</TableCell>
-            <TableCell className="tableCell">Phone</TableCell>
+              <TableCell className="tableCell">Phone</TableCell>
 
             <TableCell className="tableCell">Profile Completion</TableCell>
             <TableCell className="tableCell">Profile Verification</TableCell>
@@ -129,10 +127,7 @@ const List = ({ dataanl }) => {
               </TableCell>
               <TableCell>{row.name}</TableCell>
               <TableCell>{row.email}</TableCell>
-              <TableCell>{row.degreeName}</TableCell>
-              <TableCell>{row.teachingsExperience}</TableCell>
-              <TableCell>{row.dateOfBirth}</TableCell>
-              <TableCell>{row.phone}</TableCell>
+                <TableCell>{row.phone}</TableCell>
            
               <TableCell className="tableCell">
                 <span
@@ -157,6 +152,7 @@ const List = ({ dataanl }) => {
         </TableBody>
       </Table>
     </TableContainer>
+    </div>
   );
 };
 

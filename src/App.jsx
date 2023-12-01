@@ -22,7 +22,10 @@ import PayoutRequestPage from "./pages/PayoutRequests";
 import DetailsRequestsPayout from "./pages/PayoutRequests/details";
 import TeacherDetails from "./pages/teacherverification/verificationDetails";
 import StudentDetails from "./components/datatable/StudentsDetails";
- 
+import BankAccounts from "./pages/bankaccounts";
+import ChatPage from "./pages/Chats";
+import ChatDetails from "./pages/Chats/ChatDetails";
+
 function App() {
   const { darkMode } = useContext(DarkModeContext);
 
@@ -41,10 +44,19 @@ function App() {
             <Route path="teacherverify" element={<Teacherverifytable />} />
             <Route path="EnrollRequest" element={<EnrollRequetsPage />} />
             <Route path="PayoutRequest" element={<PayoutRequestPage />} />
-            <Route path="payoutrequestdetail/:id" element={<DetailsRequestsPayout />} />
-            <Route path="TeacherDetails/:id/:type" element={<TeacherDetails />} />
+            <Route
+              path="payoutrequestdetail/:id"
+              element={<DetailsRequestsPayout />}
+            />
+            <Route
+              path="TeacherDetails/:id/:type"
+              element={<TeacherDetails />}
+            />
             <Route path="StudentsDetails/:id" element={<StudentDetails />} />
             <Route path="requestdetail/:id" element={<DetailsRequests />} />
+            <Route path="BankAccounts" element={<BankAccounts />} />
+            <Route path="Chats" element={<ChatPage />} />
+            <Route path="ChatDetails/:id" element={<ChatDetails />} />
             <Route path="login" element={<Login />} />
             <Route path="users">
               <Route index element={<List />} />

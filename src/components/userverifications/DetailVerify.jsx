@@ -68,14 +68,28 @@ export default function DetailsTeacher({ id, type }) {
         setisloadingre(false);
       });
   };
+  const deleteUser = () => {
+    setisloadingre(true);
+
+    axios
+      .post(`/teacher/deleteteacher/${id}`)
+      .then((res) => {
+        console.log(res);
+        alert("User Deleted Successfully!");
+        setisloadingre(false);
+        navigate("/teachersrecord");
+      })
+      .catch((err) => {
+        console.log(err);
+        setisloadingre(false);
+      });
+  };
   React.useEffect(() => {
     getAllusers();
   }, []);
 
   return (
     <div className="p-5">
-      
-
       {isloading ? (
         <small className="text-blue-500 text-[20px]">Loading...</small>
       ) : (
@@ -87,7 +101,10 @@ export default function DetailsTeacher({ id, type }) {
                   component="img"
                   alt="green iguana"
                   height="140"
-                  image={data?.profilepicture}
+                  image={
+                    data?.profilepicture ||
+                    "https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png"
+                  }
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
@@ -163,21 +180,41 @@ export default function DetailsTeacher({ id, type }) {
                     </Typography>
                   </div>
                 </CardContent>
-                {type === "verify" && <CardActions>
-                  {( isloadingac) || isloadingre ? (
-                    <small>Processing...</small>
-                  ) : (
-                    <>
-                      {" "}
-                      <Button size="small" onClick={() => AcceptRequest()}>
-                        <span className="text-green-500">Accept</span>
-                      </Button>
-                      <Button size="small" onClick={() => Rejectrequest()}>
-                        <span className="text-red-500">Reject</span>
-                      </Button>{" "}
-                    </>
-                  )}
-                </CardActions>}
+                {type === "verify" ? (
+                  <CardActions>
+                    {isloadingac || isloadingre ? (
+                      <small>Processing...</small>
+                    ) : (
+                      <>
+                        {" "}
+                        <Button size="small" onClick={() => AcceptRequest()}>
+                          <span className="text-green-500">Accept</span>
+                        </Button>
+                        <Button size="small" onClick={() => Rejectrequest()}>
+                          <span className="text-red-500">Reject</span>
+                        </Button>{" "}
+                        {type !== "verify" && (
+                          <Button size="small" onClick={() => deleteUser()}>
+                            <span className="text-red-500">Delete</span>
+                          </Button>
+                        )}{" "}
+                      </>
+                    )}
+                  </CardActions>
+                ) : (
+                  <CardActions>
+                    {isloadingac || isloadingre ? (
+                      <small>Processing...</small>
+                    ) : (
+                      <>
+                        {" "}
+                        <Button size="small" onClick={() => deleteUser()}>
+                          <span className="text-red-500">Delete</span>
+                        </Button>
+                      </>
+                    )}
+                  </CardActions>
+                )}
               </Card>
             ))
           ) : (

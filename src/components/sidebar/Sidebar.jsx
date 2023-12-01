@@ -52,7 +52,7 @@ const Sidebar = () => {
               <span>PayOut Requests</span>
             </li>
           </Link>
-          <Link to="/chats" style={{ textDecoration: "none" }}>
+          <Link to="/Chats" style={{ textDecoration: "none" }}>
             <li>
               <CreditCardIcon className="icon" />
               <span>Chat Record</span>
@@ -69,10 +69,12 @@ const Sidebar = () => {
             <span>Delivery</span>
           </li> */}
           <p className="title">USEFUL</p>
+          <Link to="/BankAccounts" style={{ textDecoration: "none" }}>
           <li>
             <InsertChartIcon className="icon" />
-            <span>Stats</span>
+            <span >Bank Accounts</span>
           </li>
+          </Link>
           <li>
             <NotificationsNoneIcon className="icon" />
             <span>Notifications</span>
