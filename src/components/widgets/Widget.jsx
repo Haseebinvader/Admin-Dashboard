@@ -1,18 +1,18 @@
 /* eslint-disable react/prop-types */
-import "./widget.scss";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
-import { useNavigate } from "react-router-dom";
+import "./widget.scss"
+import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined"
+import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined"
+import { useNavigate } from "react-router-dom"
 
 const Widget = ({ type, dataanl }) => {
-  let data;
-  const navigate = useNavigate();
+  let data
+  const navigate = useNavigate()
   //temporary
 
   switch (type) {
     case "user":
       data = {
-        title: "STUDENTS",
+        title: "VERIFIED STUDENTS",
         isMoney: false,
         link: "See all students",
         icon: (
@@ -24,11 +24,11 @@ const Widget = ({ type, dataanl }) => {
             }}
           />
         ),
-      };
-      break;
+      }
+      break
     case "order":
       data = {
-        title: "TEACHERS",
+        title: "VERIFIED TEACHERS",
         isMoney: false,
         link: "View all teachers",
         icon: (
@@ -40,11 +40,11 @@ const Widget = ({ type, dataanl }) => {
             }}
           />
         ),
-      };
-      break;
+      }
+      break
     case "earning":
       data = {
-        title: "Parents",
+        title: "VERIFIED Parents",
         isMoney: true,
         link: "View all parents",
         icon: (
@@ -56,8 +56,8 @@ const Widget = ({ type, dataanl }) => {
             }}
           />
         ),
-      };
-      break;
+      }
+      break
     case "balance":
       data = {
         title: "BALANCE",
@@ -72,10 +72,10 @@ const Widget = ({ type, dataanl }) => {
             }}
           />
         ),
-      };
-      break;
+      }
+      break
     default:
-      break;
+      break
   }
 
   return (
@@ -100,12 +100,9 @@ const Widget = ({ type, dataanl }) => {
           {data.link}
         </span>
       </div>
-      <div className="right">
-       
-        {data.icon}
-      </div>
+      <div className="right">{data.icon}</div>
     </div>
-  );
-};
+  )
+}
 
-export default Widget;
+export default Widget

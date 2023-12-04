@@ -13,9 +13,12 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import { Link } from "react-router-dom"
 import { DarkModeContext } from "../../context/darkModeContext"
 import { useContext } from "react"
+import { funcisAuthorized } from "../../Redux/loginslice"
+import { useDispatch } from "react-redux"
 
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext)
+  const dispatchs = useDispatch()
   return (
     <div className="sidebar">
       <div className="top">
@@ -70,10 +73,10 @@ const Sidebar = () => {
           </li> */}
           <p className="title">USEFUL</p>
           <Link to="/BankAccounts" style={{ textDecoration: "none" }}>
-          <li>
-            <InsertChartIcon className="icon" />
-            <span >Bank Accounts</span>
-          </li>
+            <li>
+              <InsertChartIcon className="icon" />
+              <span>Bank Accounts</span>
+            </li>
           </Link>
           <li>
             <NotificationsNoneIcon className="icon" />
@@ -97,7 +100,7 @@ const Sidebar = () => {
             <AccountCircleOutlinedIcon className="icon" />
             <span>Profile</span>
           </li>
-          <li>
+          <li onClick={() => dispatchs(funcisAuthorized(false))}>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>
           </li>
