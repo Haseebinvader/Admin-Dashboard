@@ -35,7 +35,7 @@ export default function StudentsTable() {
 
   return (
     <div className="p-5">
-       <div className="datatableTitle">
+      <div className="datatableTitle">
         <div>
           <Link to="/studentsrecord">
             <Button variant="outlined" color="success">
@@ -53,7 +53,6 @@ export default function StudentsTable() {
             </Button>
           </Link>
         </div>
-        
       </div>
       <h1 className="mb-5 mt-3 text-blue-500 text-[15px]">
         Students
@@ -67,14 +66,11 @@ export default function StudentsTable() {
               <Card sx={{ maxWidth: 345 }} key={data?._id}>
                 <CardMedia
                   component="img"
-                  alt="green iguana"
                   height="140"
-                  image={
-                    data?.profilepicture ||
-                    "https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png"
-                  }
                 />
                 <CardContent>
+                  <img style={{ borderRadius: '10px', height: '22rem', width: '300px' }} src={data?.profilepicture ||
+                    "https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png"} alt="" />
                   <Typography gutterBottom variant="h5" component="div">
                     {data?.name}
                   </Typography>
