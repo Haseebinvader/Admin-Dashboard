@@ -37,7 +37,7 @@ export default function DetailsStudents({ id }) {
         setAllusers([]);
       });
   };
-   
+
   React.useEffect(() => {
     getAllusers();
   }, []);
@@ -45,7 +45,7 @@ export default function DetailsStudents({ id }) {
   return (
     <div className="p-5">
       <h1 className="mb-5 text-blue-500 text-[15px]">
-        Student Profile  
+        Student Profile
       </h1>
 
       {isloading ? (
@@ -55,31 +55,30 @@ export default function DetailsStudents({ id }) {
           {Allusers?.length > 0 ? (
             Allusers?.filter((data) => data?._id === id)?.map((data) => (
               <Card sx={{ maxWidth: 600 }} key={data?._id}>
-                
+
                 <CardMedia
-                className="h-[20rem]"
+                  className="h-[20rem]"
                   component="img"
-                  alt="green iguana"
                   height={40}
-                  image={data?.profilepicture}
+                  image={data?.profilepicture || "https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png"}
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     {data?.name}
                   </Typography>
                   <div className="mt-3 flex flex-col gap-2">
-                  <div className="flex justify-between">
+                    <div className="flex justify-between">
+                      <Typography variant="body2" color="text.secondary">
+                        <span className="text-black font-semibold text-lg">
+                          Email:&nbsp;
+                        </span>
+                        <span className="text-blue-500 font-semibold">
+                          {data?.email}
+                        </span>
+                      </Typography>
+
+                    </div>
                     <Typography variant="body2" color="text.secondary">
-                      <span className="text-black font-semibold text-lg">
-                        Email:&nbsp;
-                      </span>
-                      <span className="text-blue-500 font-semibold">
-                        {data?.email}
-                      </span>
-                    </Typography>
-                   
-                  </div>
-                  <Typography variant="body2" color="text.secondary">
                       <span className="text-black font-semibold text-lg">
                         Address:&nbsp;
                       </span>
@@ -87,56 +86,56 @@ export default function DetailsStudents({ id }) {
                         {data?.address}
                       </span>
                     </Typography>
-                  <div className="flex justify-between">
-                    <Typography variant="body2" color="text.secondary">
-                      <span className="text-black font-semibold text-lg">
-                        Grade:&nbsp;
-                      </span>
-                      <span className="text-blue-500 font-semibold">
-                        {data?.grade}
-                      </span>
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      <span className="text-black font-semibold text-lg">
-                      Category:&nbsp;
-                      </span>
-                      <span className="text-green-500 font-bold text-[15px]">
-                        {data?.Category}  
-                      </span>
-                    </Typography>
-                  </div>
-                  <div className="flex justify-between">
-                    <Typography variant="body2" color="text.secondary">
-                      <span className="text-black font-semibold text-lg">
-                        Phone#:&nbsp;
-                      </span>
-                      <span className="text-blue-500 font-semibold">
-                        {data?.phone}
-                      </span>
-                    </Typography>
-                    
-                  </div>
-                  <div className="flex justify-between">
-                    <Typography variant="body2" color="text.secondary">
-                      <span className="text-black font-semibold text-lg">
-                        Institute:&nbsp;
-                      </span>
-                       
+                    <div className="flex justify-between">
+                      <Typography variant="body2" color="text.secondary">
+                        <span className="text-black font-semibold text-lg">
+                          Grade:&nbsp;
+                        </span>
+                        <span className="text-blue-500 font-semibold">
+                          {data?.grade}
+                        </span>
+                      </Typography>
+                      <Typography variant="body2" color="text.secondary">
+                        <span className="text-black font-semibold text-lg">
+                          Category:&nbsp;
+                        </span>
+                        <span className="text-green-500 font-bold text-[15px]">
+                          {data?.Category}
+                        </span>
+                      </Typography>
+                    </div>
+                    <div className="flex justify-between">
+                      <Typography variant="body2" color="text.secondary">
+                        <span className="text-black font-semibold text-lg">
+                          Phone#:&nbsp;
+                        </span>
+                        <span className="text-blue-500 font-semibold">
+                          {data?.phone}
+                        </span>
+                      </Typography>
+
+                    </div>
+                    <div className="flex justify-between">
+                      <Typography variant="body2" color="text.secondary">
+                        <span className="text-black font-semibold text-lg">
+                          Institute:&nbsp;
+                        </span>
+
                         <span
                           className="text-blue-500 font-semibold pl-3 text-[15px]"
                           key={data}
                         >
                           {data?.instituteName},
                         </span>
-                      
-                    </Typography>
-                  </div>
+
+                      </Typography>
+                    </div>
                   </div>
                   <div className="mt-3 flex flex-col gap-2">
-                  <Typography gutterBottom variant="h5" component="div">
-                    Parent's Details
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
+                    <Typography gutterBottom variant="h5" component="div">
+                      Parent's Details
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
                       <span className="text-black font-semibold text-lg">
                         Name:&nbsp;
                       </span>
@@ -160,7 +159,7 @@ export default function DetailsStudents({ id }) {
                     </Typography>
                   </div>
                 </CardContent>
-                
+
               </Card>
             ))
           ) : (

@@ -99,7 +99,6 @@ export default function DetailsTeacher({ id, type }) {
               <Card sx={{ maxWidth: 500 }} key={data?._id}>
                 <CardMedia
                   component="img"
-                  alt="green iguana"
                   height="140"
                   image={
                     data?.profilepicture ||

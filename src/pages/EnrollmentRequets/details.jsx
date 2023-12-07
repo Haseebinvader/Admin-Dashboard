@@ -208,7 +208,6 @@ const DetailsRequests = () => {
               component="img"
               height="auto"
               image={reqdata[0]?.paymentFile}
-              alt="Paella dish"
             />
             <CardContent>
               <Typography variant="body2" color="text.secondary">

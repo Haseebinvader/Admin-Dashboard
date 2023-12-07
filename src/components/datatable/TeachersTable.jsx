@@ -64,14 +64,12 @@ export default function TeachersTable() {
               <Card sx={{ maxWidth: 345 }} key={data?._id}>
                 <CardMedia
                   component="img"
-                  alt="green iguana"
                   height="140"
-                  image={
-                    data?.profilepicture ||
-                    "https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png"
-                  }
+
                 />
                 <CardContent>
+                  <img style={{ borderRadius: '10px', height: '22rem', width: '300px' }} src={data?.profilepicture ||
+                    "https://www.pngkey.com/png/detail/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png"} alt="" />
                   <Typography gutterBottom variant="h5" component="div">
                     {data?.name}
                   </Typography>
