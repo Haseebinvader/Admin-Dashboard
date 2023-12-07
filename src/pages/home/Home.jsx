@@ -38,6 +38,7 @@ const Home = () => {
           <Widget type="user" dataanl={data?.allstudentsanl} />
           <Widget type="order" dataanl={data?.allteachersanl} />
           <Widget type="earning" dataanl={data?.allparentsanl} />
+          <Widget type="balance" dataanl={data?.AdminEarning} />
           {/* <Widget type="balance" /> */}
         </div>
         <div className="charts">

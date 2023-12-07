@@ -10,9 +10,9 @@ import { persistor, store } from "./Redux/index.js"
 
 import { PersistGate } from "redux-persist/integration/react"
 
-// axios.defaults.baseURL = "http://localhost:8000/api"
+axios.defaults.baseURL = "http://localhost:8000/api"
 
-axios.defaults.baseURL = "https://tutor4u.vercel.app/api"
+// axios.defaults.baseURL = "https://tutor4u.vercel.app/api"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>

@@ -11,8 +11,11 @@ const loginSlice = createSlice({
     funcisAuthorized: (state, action) => {
       state.isAuthorized = action.payload
     },
+    funcisAuthdata: (state, action) => {
+      state.data = action.payload
+    },
   },
 })
-export const { funcisAuthorized } = loginSlice.actions
+export const { funcisAuthorized, funcisAuthdata } = loginSlice.actions
 
 export default loginSlice.reducer

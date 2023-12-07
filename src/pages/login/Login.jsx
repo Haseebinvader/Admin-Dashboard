@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/no-unknown-property */
 import { useDispatch } from "react-redux"
-import { funcisAuthorized } from "../../Redux/loginslice"
+import { funcisAuthdata, funcisAuthorized } from "../../Redux/loginslice"
 import "./login.scss"
 import { useState } from "react"
 import axios from "axios"
@@ -26,6 +26,7 @@ const Login = () => {
         console.log(res)
         alert("Logged In Successfully!")
         dispatch(funcisAuthorized(true))
+        dispatch(funcisAuthdata(res?.data?.data))
         setisLoading(false)
       })
       .catch((err) => {

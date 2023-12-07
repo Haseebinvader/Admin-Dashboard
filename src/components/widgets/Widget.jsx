@@ -60,9 +60,9 @@ const Widget = ({ type, dataanl }) => {
       break
     case "balance":
       data = {
-        title: "BALANCE",
+        title: "Earnings",
         isMoney: true,
-        link: "See details",
+
         icon: (
           <AccountBalanceWalletOutlinedIcon
             className="icon"
@@ -82,7 +82,10 @@ const Widget = ({ type, dataanl }) => {
     <div className="widget">
       <div className="left">
         <span className="title">{data.title}</span>
-        <span className="counter">{dataanl}</span>
+        <span className="counter">
+          {type === "balance" ? "$" : ""}
+          {dataanl}
+        </span>
         <span
           className="link"
           onClick={() =>
