@@ -169,7 +169,7 @@ const DetailsRequestsPayout = () => {
           <Card sx={{ minWidth: 275 }} key={reqdata?._id}>
             <CardContent>
               <p>
-                <span className="amount">$ {reqdata?.amount}</span>
+                <span className="amount">PKR - {reqdata?.amount}</span>
               </p>
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
                 Requested&nbsp;By:

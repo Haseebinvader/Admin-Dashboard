@@ -44,7 +44,7 @@ export default function PayoutRequests() {
             <CardContent>
               <div className="carduper">
                 <div>
-                  <span className="amount">$ {data?.amount}</span>
+                  <span className="amount">PKR - {data?.amount}</span>
                 </div>
                 <div>
                   <span
@@ -52,8 +52,8 @@ export default function PayoutRequests() {
                       data?.status === "pending"
                         ? "pamount "
                         : data?.status === "completed"
-                        ? "camount "
-                        : "ramount "
+                          ? "camount "
+                          : "ramount "
                     }
                   >
                     {data?.status}
@@ -61,7 +61,7 @@ export default function PayoutRequests() {
                 </div>
               </div>
               <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Requested&nbsp;By:
+                Requested By
               </Typography>
               <Typography variant="h5" component="div">
                 {data?.instructor?.name}
@@ -72,7 +72,7 @@ export default function PayoutRequests() {
                 size="small"
                 onClick={() => navigate(`/payoutrequestdetail/${data?._id}`)}
               >
-                Show&nbsp;Details
+                Show Details
               </Button>
             </CardActions>
           </Card>

@@ -83,17 +83,16 @@ const Widget = ({ type, dataanl }) => {
       <div className="left">
         <span className="title">{data.title}</span>
         <span className="counter">
-          {type === "balance" ? "$" : ""}
+          {type === "balance" ? "PKR - " : ""}
           {dataanl}
         </span>
         <span
           className="link"
           onClick={() =>
             navigate(
-              `/${
-                type === "user"
-                  ? "studentsrecord"
-                  : type === "order"
+              `/${type === "user"
+                ? "studentsrecord"
+                : type === "order"
                   ? "teachersrecord"
                   : "parentsrecord"
               }`
